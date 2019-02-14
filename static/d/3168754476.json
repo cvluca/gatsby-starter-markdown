@@ -1,1 +1,1 @@
-{"data":{"site":{"siteMetadata":{"title":"Gatsby Markdown Starter"}},"allMarkdownRemark":{"edges":[{"node":{"fields":{"slug":"/docs/test"}}},{"node":{"fields":{"slug":"/blog/README"}}},{"node":{"fields":{"slug":"/blog/hello-world"}}},{"node":{"fields":{"slug":"/docs/test-1/test1"}}}]}}}
+{"data":{"site":{"siteMetadata":{"title":"Gatsby Markdown Starter"}},"allMarkdownRemark":{"edges":[{"node":{"fields":{"slug":"/blog/first-blog"}}},{"node":{"fields":{"slug":"/blog/second-blog"}}},{"node":{"fields":{"slug":"/docs/get-started/introduction"}}}]}}}
