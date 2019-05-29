@@ -1,7 +1,13 @@
 import React from 'react'
 import { Link, graphql, StaticQuery } from 'gatsby'
+import Button from 'antd/lib/button'
+import Icon from 'antd/lib/icon'
+import List from 'antd/lib/List'
 
-const Menu = () => {
+
+
+const Menu = (prop) => {
+  const { show } = prop
   return (
     <StaticQuery
       query={graphql`
@@ -20,6 +26,8 @@ const Menu = () => {
         const menuItems = data.allMenuItems.edges.map(edge => edge.node).reverse()
         return (
           <div>
+          {show &&
+          <div>
             {menuItems.map(item => {
               return (
                 <div 
@@ -37,6 +45,23 @@ const Menu = () => {
                 </div>
               )
             })}
+          </div>
+          }
+          {!show &&
+          <>
+            <Button 
+              style={{
+                float: "right",
+                marginTop: '-10px',
+                marginRight: '-10px',
+                color: 'white',
+              }}
+              type='link'
+            >
+              <Icon type="menu" />
+            </Button>
+          </>
+          }
           </div>
         )
       }}

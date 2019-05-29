@@ -1,5 +1,5 @@
 import { 
-  UPDATE_HEADER_HEIGHT,
+  // UPDATE_HEADER_HEIGHT,
   SET_ANCHOR_OPEN,
   SET_SIDEBAR_OPEN, 
   SET_SIDEBAR_DOCKED, 
@@ -9,12 +9,12 @@ import {
 } from "./actionTypes";
 
 // header
-export const updateHeaderHeight = (height) => ({
-  type: UPDATE_HEADER_HEIGHT,
-  payload: {
-    headerHeight: height
-  }
-})
+// export const updateHeaderHeight = (height) => ({
+//   type: UPDATE_HEADER_HEIGHT,
+//   payload: {
+//     headerHeight: height
+//   }
+// })
 
 // anchor
 export const onSetAnchorOpen = (open) => ({

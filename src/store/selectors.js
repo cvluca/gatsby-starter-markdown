@@ -1,8 +1,5 @@
 export const getSidebarState = store => store.layout.sidebar;
 
-// header
-export const getHeaderHeightState = store => store.layout.header.height;
-
 // anchor
 export const getAnchorState = store => store.layout.anchor;
 

@@ -1,5 +1,5 @@
 import { 
-  UPDATE_HEADER_HEIGHT,
+  // UPDATE_HEADER_HEIGHT,
   SET_ANCHOR_OPEN,
   SET_SIDEBAR_OPEN, 
   SET_SIDEBAR_DOCKED,
@@ -24,15 +24,15 @@ const initialState = {
 export default function(state=initialState, action) {
   switch (action.type) {
     // header
-    case UPDATE_HEADER_HEIGHT: {
-      return {
-        ...state,
-        header: { 
-          ...state.header,
-          height: action.payload.headerHeight 
-        }
-      }
-    }
+    // case UPDATE_HEADER_HEIGHT: {
+    //   return {
+    //     ...state,
+    //     header: { 
+    //       ...state.header,
+    //       height: action.payload.headerHeight 
+    //     }
+    //   }
+    // }
     // anchor
     case SET_ANCHOR_OPEN: {
       return {
