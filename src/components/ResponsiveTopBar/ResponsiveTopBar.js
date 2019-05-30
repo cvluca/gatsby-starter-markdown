@@ -80,7 +80,7 @@ class ResponsiveTopBar extends Component {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'white'
+          backgroundColor: 'white',
         }}>
           <div style={{
             position: "absolute",
