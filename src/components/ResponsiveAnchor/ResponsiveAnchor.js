@@ -19,7 +19,7 @@ class ResponsiveAnchor extends Component {
           top: 0,
           bottom: 0
         }}>
-          <TableOfContents />
+          <TableOfContents offsetTop={80} affix={true}/>
         </div>
       </div>
     )

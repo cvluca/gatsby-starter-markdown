@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby';
 import Menu from '../Menu';
+import { getMenuState } from '../../store/selectors';
+import { connect } from 'react-redux';
 
 class Header extends Component {
 
   render() {
-    const { siteTitle, sidebarDocked } = this.props
+    const { 
+      siteTitle,
+      sidebarDocked,
+      menuOpen,
+      nMenuItem,
+    } = this.props
+    
     return (
       <div
         style={{
-          //   position: "fixed",
-          //   top: 0,
+            // position: "fixed",
+            // top: 0,
           width: "100%",
-          height: '60px',
-          zIndex: 1000,
-          marginBottom: '1.45rem',
+          height: (menuOpen && !sidebarDocked) ? nMenuItem*29 + 57 : 55,
+          marginBottom: 20,
           background: 'cornflowerblue',
           overflow: 'auto',
         }}
@@ -23,12 +30,13 @@ class Header extends Component {
           style={{
             margin: '0 auto',
             maxWidth: 1360,
-            padding: '1.4rem 1.0875rem',
+            padding: '15px 18px',
+            whiteSpace: 'nowrap',
           }}
         >
           <div style={{
             float: 'left',
-            marginBottom: '0.8em',
+            marginBottom: '10px',
           }}>
             <h1 style={{ margin: 0, fontSize: "1.25rem" }}>
               <Link
@@ -42,11 +50,18 @@ class Header extends Component {
               </Link>
             </h1>
           </div>
-          <Menu show={sidebarDocked}/>
+          <Menu sidebarDocked={sidebarDocked}/>
         </div>
       </div>
     )
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    menuOpen: getMenuState(state).open,
+    nMenuItem: getMenuState(state).nItem,
+  }
+}
+
+export default connect(mapStateToProps) (Header);

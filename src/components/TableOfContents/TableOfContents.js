@@ -59,6 +59,7 @@ class TableOfContents extends Component {
 
   render() {
     const { anchors } = this.state
+    const { offsetTop, affix } = this.props
     const loop = data =>  data.map((item) => {
       if (item.children.length > 0) {
         return (
@@ -70,7 +71,7 @@ class TableOfContents extends Component {
       return (<Link href={item.href} title={item.title} key={item.href}/>)
     })
     return (
-      <Anchor onClick={this.onSetAnchorOpen} offsetTop={0}>
+      <Anchor onClick={this.onSetAnchorOpen} offsetTop={offsetTop} affix={affix}>
         {loop(anchors)}
         {/* {(anchors.length > 1 && loop(anchors)) ||
          (anchors.length === 1 && loop(anchors[0].children))} */}

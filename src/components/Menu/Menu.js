@@ -1,72 +1,122 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link, graphql, StaticQuery } from 'gatsby'
 import Button from 'antd/lib/button'
-import Icon from 'antd/lib/icon'
-import List from 'antd/lib/List'
+import { connect } from 'react-redux'
+import { onChangeMenuState } from '../../actions/layout'
+import List from 'antd/lib/list'
+import { getMenuState } from '../../store/selectors';
 
 
+class Menu extends Component {
+  onChangeMenuState = (nItem) => {
+    this.props.onChangeMenuState(nItem)
+  }
 
-const Menu = (prop) => {
-  const { show } = prop
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          allMenuItems {
-            edges {
-              node {
-                name
-                link
+  render() {
+    const { 
+      sidebarDocked,
+      menuOpen,
+    } = this.props
+
+    return (
+      <StaticQuery
+        query={graphql`
+          query {
+            allMenuItems {
+              edges {
+                node {
+                  name
+                  link
+                }
               }
             }
           }
-        }
-      `}
-      render={data => {
-        const menuItems = data.allMenuItems.edges.map(edge => edge.node).reverse()
-        return (
-          <div>
-          {show &&
-          <div>
-            {menuItems.map(item => {
-              return (
-                <div 
-                  style={{ marginLeft: "2em", float: "right" }}
-                  key={menuItems.indexOf(item)}
-                >
-                  <p style={{ margin:0, fontSize: "1rem" }}>
-                    <Link
-                      to={item.link}
-                      style={{ color: 'white', textDecoration: 'none' }}
-                    >
-                      {item.name}
-                    </Link>
-                  </p>
-                </div>
-              )
-            })}
-          </div>
-          }
-          {!show &&
-          <>
-            <Button 
-              style={{
-                float: "right",
-                marginTop: '-10px',
-                marginRight: '-10px',
-                color: 'white',
-              }}
-              type='link'
-            >
-              <Icon type="menu" />
-            </Button>
-          </>
-          }
-          </div>
-        )
-      }}
-    />
-  )
+        `}
+        render={data => {
+          const menuItems = data.allMenuItems.edges.map(edge => edge.node)
+          return (
+            <div>
+            {sidebarDocked &&
+            <div>
+              {menuItems.reverse().map(item => {
+                return (
+                  <div 
+                    style={{ marginLeft: "2em", float: "right" }}
+                    key={menuItems.indexOf(item)}
+                  >
+                    <p style={{ margin:0, fontSize: "1rem" }}>
+                      <Link
+                        to={item.link}
+                        style={{ color: 'white', textDecoration: 'none' }}
+                      >
+                        {item.name}
+                      </Link>
+                    </p>
+                  </div>
+                )
+              })}
+            </div>
+            }
+            {!sidebarDocked &&
+              <Button 
+                style={{
+                  position: 'fixed',
+                  right: 10,
+                  top: 12,
+                  color: 'white',
+                }}
+                type='link'
+                onClick={() => {this.onChangeMenuState(menuItems.length)}}
+                icon="menu"
+              />
+            }
+            {menuOpen && !sidebarDocked &&
+              <List
+                itemLayout="horizontal"
+                dataSource={menuItems}
+                renderItem={item => (
+                  <List.Item
+                    style={{
+                      listStyle: 'none',
+                      marginLeft: '-20px',
+                    }}
+                    key={menuItems.indexOf(item)}
+                  >
+                    <List.Item.Meta
+                      title={
+                        <Link
+                          to={item.link}
+                          style={{ color: 'white', textDecoration: 'none' }}
+                        >
+                          {item.name}
+                        </Link>
+                      }
+                    />
+                  </List.Item>
+                )}
+                style={{
+                  width: '100%',
+                  float: 'left',
+                }}
+              />
+            }
+            </div>
+          )
+        }}
+      />
+    )
+  }
 }
 
-export default Menu
+const mapStateToProps = (state) => {
+  return {
+    menuOpen: getMenuState(state).open,
+  }
+}
+
+const mapDispatchToProps = {
+  onChangeMenuState,
+}
+
+// export default Menu
+export default connect(mapStateToProps, mapDispatchToProps) (Menu)

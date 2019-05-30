@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
-import { getSidebarState, getAnchorState } from '../../store/selectors';
+import { getSidebarState, getAnchorState, getMenuState } from '../../store/selectors';
 import { onSetAnchorOpen, onSetSidebarOpen } from '../../actions/layout'
 import SidebarContents from '../SidebarContents';
 import TableOfContents from '../TableOfContents';
@@ -25,12 +25,18 @@ class ResponsiveTopBar extends Component {
   }
 
   render() {
-    const { sidebarOpen, anchorOpen, root } = this.props
+    const { 
+      sidebarOpen,
+      anchorOpen,
+      root,
+      menuOpen,
+      nMenuItem,
+    } = this.props
 
     return (
       <div
         style={{
-          height: '100%',
+          height: 20,
         }}
       >
       <div
@@ -39,7 +45,7 @@ class ResponsiveTopBar extends Component {
           width: "100%",
           height: 40,
           background: 'aliceblue',
-          marginTop: '-26px',
+          marginTop: '-20px',
         }}
       >
         {!anchorOpen &&
@@ -69,7 +75,7 @@ class ResponsiveTopBar extends Component {
       {sidebarOpen &&
         <div style={{
           position: "fixed",
-          top: 97,
+          top: menuOpen ? nMenuItem*29 + 97 : 95,
           left: 0,
           right: 0,
           bottom: 0,
@@ -93,16 +99,16 @@ class ResponsiveTopBar extends Component {
       {anchorOpen &&
         <div style={{
           position: "fixed",
-          top: 97,
+          top: menuOpen ? nMenuItem*29 + 97 : 95,
           left: 0,
-          right: 10,
+          right: 0,
           bottom: 0,
           overflowY: "auto",
           backgroundColor: 'white',
           WebkitOverflowScrolling: "touch",
           transition: "left .3s ease-out, right .3s ease-out",
         }}>
-          <TableOfContents />
+          <TableOfContents offsetTop={0} affix={false}/>
         </div>
       }
 
@@ -115,6 +121,8 @@ const mapStateToProps = (state) => {
   return {
     sidebarOpen: getSidebarState(state).open,
     anchorOpen: getAnchorState(state).open,
+    menuOpen: getMenuState(state).open,
+    nMenuItem: getMenuState(state).nItem,
   }
 }
 

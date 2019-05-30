@@ -8,11 +8,9 @@ import ResponsiveSidebar from '../ResponsiveSidebar';
 import Container from '../Container';
 import ResponsiveAnchor from '../ResponsiveAnchor';
 import ResponsiveTopBar from '../ResponsiveTopBar';
-// import { connect } from 'react-redux'
 import { pathPrefix } from '../../../gatsby-config'
 import MediaQuery from "react-responsive";
 import { default as AntdLayout } from 'antd/lib/layout';
-import { Affix } from 'antd';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col'
 
@@ -72,20 +70,26 @@ const Layout = ({
                   <html lang="en" />
                 </Helmet>
                 <AntdLayout>
-                  <AntdLayout.Header>
-                    <Affix>
-                      <Row>
-                        <Col>
-                          <Header siteTitle={data.site.siteMetadata.title} sidebarDocked={!matches}/>
-                        </Col>
-                        <Col>
-                          {(matches && onPostPage) ?
-                            <ResponsiveTopBar root={sidebarRoot} />
-                            : null
-                          }
-                        </Col>
-                      </Row>
-                    </Affix>
+                  <AntdLayout.Header
+                    style={{
+                      position: 'fixed',
+                      top: 0,
+                      width: '100%',
+                      overflow: 'hidden',
+                      zIndex: 100,
+                    }}
+                  >
+                    <Row>
+                      <Col>
+                        <Header siteTitle={data.site.siteMetadata.title} sidebarDocked={!matches}/>
+                      </Col>
+                      <Col>
+                        {(matches && onPostPage) ?
+                          <ResponsiveTopBar root={sidebarRoot} />
+                          : null
+                        }
+                      </Col>
+                    </Row>
                   </AntdLayout.Header>
 
                   {(!matches && onPostPage) ?
@@ -109,13 +113,11 @@ const Layout = ({
                       </AntdLayout.Sider>
                     </AntdLayout>
                     :
-                    <AntdLayout>
-                      <AntdLayout.Content>
-                        <Container sidebarDocked={!matches} onPostPage={onPostPage}>
-                          {children}
-                        </Container>
-                      </AntdLayout.Content>
-                    </AntdLayout>
+                    <AntdLayout.Content>
+                      <Container sidebarDocked={!matches} onPostPage={onPostPage}>
+                        {children}
+                      </Container>
+                    </AntdLayout.Content>
                   }
                 </AntdLayout>
               </>)
