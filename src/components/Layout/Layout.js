@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
@@ -13,11 +13,23 @@ import MediaQuery from "react-responsive";
 import { default as AntdLayout } from 'antd/lib/layout';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col'
+import { getContentState } from '../../store/selectors';
+import { setPostPageState } from '../../actions/layout'
+import { connect } from 'react-redux'
 
-const Layout = ({
-  children,
-  sidebarRoot,
-}) => (
+class Layout extends Component {
+  setPostPageState = (state) => {
+    this.props.setPostPageState(state)
+  }
+
+  render () {
+    const {
+      children,
+      sidebarRoot,
+      onPostPage,
+    } = this.props
+
+    return (
     <StaticQuery
       query={graphql`
       query SiteTitleQuery {
@@ -39,7 +51,6 @@ const Layout = ({
     `}
       render={data => {
         const allPosts = data.allMarkdownRemark.edges.map(edge => edge.node.fields.slug)
-        let onPostPage
         if (typeof window !== 'undefined') {
           let path;
           if (pathPrefix.endsWith('/')) {
@@ -48,9 +59,9 @@ const Layout = ({
             path = window.location.pathname.replace(pathPrefix, "")
           }
           if (allPosts.indexOf(path) >= 0 || allPosts.indexOf(path.slice(0, -1)) >= 0) {
-            onPostPage = true
+            this.setPostPageState(true)
           } else {
-            onPostPage = false
+            this.setPostPageState(false)
           }
         }
 
@@ -104,7 +115,7 @@ const Layout = ({
                           right: "15%",
                         }}
                       >
-                        <Container sidebarDocked={!matches} onPostPage={onPostPage}>
+                        <Container sidebarDocked={!matches} >
                           {children}
                         </Container>
                       </AntdLayout.Content>
@@ -114,7 +125,7 @@ const Layout = ({
                     </AntdLayout>
                     :
                     <AntdLayout.Content>
-                      <Container sidebarDocked={!matches} onPostPage={onPostPage}>
+                      <Container sidebarDocked={!matches} >
                         {children}
                       </Container>
                     </AntdLayout.Content>
@@ -127,9 +138,21 @@ const Layout = ({
       }}
     />
   )
+    }
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+const mapStateToProps = (state) => {
+  return {
+    onPostPage: getContentState(state).onPostPage
+  }
+}
+
+const mapDispatchToProps = {
+  setPostPageState,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Layout)

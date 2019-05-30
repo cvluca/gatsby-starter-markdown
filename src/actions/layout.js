@@ -4,6 +4,7 @@ import {
   SET_SIDEBAR_DOCKED, 
   ON_SIDEBAR_CONTENT_EXPAND, 
   ON_CHANGE_MENU_STATE,
+  SET_POST_PAGE_STATE,
 } from "./actionTypes";
 
 // anchor
@@ -40,5 +41,13 @@ export const onChangeMenuState = (nItem) => ({
   type: ON_CHANGE_MENU_STATE,
   payload: {
     nItem: nItem,
+  }
+})
+
+// content
+export const setPostPageState = (onPostPage) => ({
+  type: SET_POST_PAGE_STATE,
+  payload: {
+    onPostPage: onPostPage,
   }
 })
