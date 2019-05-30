@@ -4,7 +4,6 @@ import {
   SET_SIDEBAR_DOCKED,
   ON_SIDEBAR_CONTENT_EXPAND,
   ON_CHANGE_MENU_STATE,
-  SET_POST_PAGE_STATE,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -18,7 +17,6 @@ const initialState = {
     autoExpandParent: true,
   },
   menu : { open : false },
-  content: { onPostPage: false },
 }
 
 export default function(state=initialState, action) {
@@ -72,16 +70,6 @@ export default function(state=initialState, action) {
           open: !state.menu.open,
           nItem: action.payload.nItem,
         }
-      }
-    }
-    // content
-    case SET_POST_PAGE_STATE: {
-      return {
-        ...state,
-        content: {
-          ...state.content,
-          onPostPage: action.payload.onPostPage
-        },
       }
     }
     default: return state

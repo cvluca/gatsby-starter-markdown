@@ -8,14 +8,10 @@ import ResponsiveSidebar from '../ResponsiveSidebar';
 import Container from '../Container';
 import ResponsiveAnchor from '../ResponsiveAnchor';
 import ResponsiveTopBar from '../ResponsiveTopBar';
-import { pathPrefix } from '../../../gatsby-config'
 import MediaQuery from "react-responsive";
 import { default as AntdLayout } from 'antd/lib/layout';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col'
-import { getContentState } from '../../store/selectors';
-import { setPostPageState } from '../../actions/layout'
-import { connect } from 'react-redux'
 
 class Layout extends Component {
   setPostPageState = (state) => {
@@ -27,6 +23,7 @@ class Layout extends Component {
       children,
       sidebarRoot,
       onPostPage,
+      slug,
     } = this.props
 
     return (
@@ -38,33 +35,9 @@ class Layout extends Component {
             title
           }
         }
-        allMarkdownRemark {
-          edges {
-            node {
-              fields {
-                slug
-              }
-            }
-          }
-        }
       }
     `}
       render={data => {
-        const allPosts = data.allMarkdownRemark.edges.map(edge => edge.node.fields.slug)
-        if (typeof window !== 'undefined') {
-          let path;
-          if (pathPrefix.endsWith('/')) {
-            path = window.location.pathname.replace(pathPrefix.slice(0, -1), "")
-          } else {
-            path = window.location.pathname.replace(pathPrefix, "")
-          }
-          if (allPosts.indexOf(path) >= 0 || allPosts.indexOf(path.slice(0, -1)) >= 0) {
-            this.setPostPageState(true)
-          } else {
-            this.setPostPageState(false)
-          }
-        }
-
         return (
           <MediaQuery
             maxWidth={1000}
@@ -96,7 +69,7 @@ class Layout extends Component {
                       </Col>
                       <Col>
                         {(matches && onPostPage) ?
-                          <ResponsiveTopBar root={sidebarRoot} />
+                          <ResponsiveTopBar root={sidebarRoot} slug={slug}/>
                           : null
                         }
                       </Col>
@@ -106,7 +79,7 @@ class Layout extends Component {
                   {(!matches && onPostPage) ?
                     <AntdLayout>
                       <AntdLayout.Sider>
-                        <ResponsiveSidebar root={sidebarRoot} />
+                        <ResponsiveSidebar root={sidebarRoot} slug={slug}/>
                       </AntdLayout.Sider>
                       <AntdLayout.Content
                         style={{
@@ -115,7 +88,7 @@ class Layout extends Component {
                           right: "15%",
                         }}
                       >
-                        <Container sidebarDocked={!matches} >
+                        <Container sidebarDocked={!matches} onPostPage={onPostPage}>
                           {children}
                         </Container>
                       </AntdLayout.Content>
@@ -125,7 +98,7 @@ class Layout extends Component {
                     </AntdLayout>
                     :
                     <AntdLayout.Content>
-                      <Container sidebarDocked={!matches} >
+                      <Container sidebarDocked={!matches} onPostPage={onPostPage}>
                         {children}
                       </Container>
                     </AntdLayout.Content>
@@ -145,14 +118,4 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-const mapStateToProps = (state) => {
-  return {
-    onPostPage: getContentState(state).onPostPage
-  }
-}
-
-const mapDispatchToProps = {
-  setPostPageState,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps) (Layout)
+export default Layout

@@ -9,6 +9,3 @@ export const getSidebarExpandedKey = store => store.layout.sidebar.expandedKey;
 
 // menu
 export const getMenuState = store => store.layout.menu;
-
-// content
-export const getContentState = store => store.layout.content;

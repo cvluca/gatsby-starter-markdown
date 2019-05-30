@@ -10,6 +10,3 @@ export const SET_ANCHOR_OPEN = "SET_ANCHOR_OPEN";
 
 // menu
 export const ON_CHANGE_MENU_STATE = "ON_CHANGE_MENU_STATE";
-
-// content
-export const SET_POST_PAGE_STATE = "SET_POST_PAGE_STATE";

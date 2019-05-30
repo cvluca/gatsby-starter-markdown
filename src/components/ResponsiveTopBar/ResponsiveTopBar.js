@@ -31,6 +31,7 @@ class ResponsiveTopBar extends Component {
       root,
       menuOpen,
       nMenuItem,
+      slug,
     } = this.props
 
     return (
@@ -92,7 +93,7 @@ class ResponsiveTopBar extends Component {
             transition: "left .3s ease-out, right .3s ease-out",
             overscrollBehaviorY: 'contain',
           }}>
-            <SidebarContents root={root}/>
+            <SidebarContents root={root} slug={slug}/>
           </div>
         </div>
       }
