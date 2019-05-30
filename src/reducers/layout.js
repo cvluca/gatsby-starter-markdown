@@ -1,11 +1,9 @@
 import { 
-  UPDATE_HEADER_HEIGHT,
   SET_ANCHOR_OPEN,
   SET_SIDEBAR_OPEN, 
   SET_SIDEBAR_DOCKED,
   ON_SIDEBAR_CONTENT_EXPAND,
-  // SET_POST_PAGE_ON,
-  // SET_POST_PAGE_OFF
+  ON_CHANGE_MENU_STATE,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -18,21 +16,12 @@ const initialState = {
     searchValue: '',
     autoExpandParent: true,
   },
-  content: { onPostPage: false },
+  menu : { open : false },
 }
 
 export default function(state=initialState, action) {
   switch (action.type) {
-    // header
-    case UPDATE_HEADER_HEIGHT: {
-      return {
-        ...state,
-        header: { 
-          ...state.header,
-          height: action.payload.headerHeight 
-        }
-      }
-    }
+
     // anchor
     case SET_ANCHOR_OPEN: {
       return {
@@ -73,34 +62,16 @@ export default function(state=initialState, action) {
         }
       }
     }
-    // content
-    // case SET_POST_PAGE_ON: {
-    //   return {
-    //     ...state,
-    //     sidebar: {
-    //       ...state.sidebar,
-    //       docked: (typeof window !== 'undefined') ? 
-    //         window.matchMedia(`(min-width: 1000px)`).matches: false,
-    //     },
-    //     content: {
-    //       ...state.content,
-    //       onPostPage: true
-    //     },
-    //   }
-    // }
-    // case SET_POST_PAGE_OFF: {
-    //   return {
-    //     ...state,
-    //     sidebar: {
-    //       ...state.sidebar,
-    //       docked: false
-    //     },
-    //     content: {
-    //       ...state.content,
-    //       onPostPage: false
-    //     },
-    //   }
-    // }
+    //menu
+    case ON_CHANGE_MENU_STATE: {
+      return {
+        ...state,
+        menu: {
+          open: !state.menu.open,
+          nItem: action.payload.nItem,
+        }
+      }
+    }
     default: return state
   }
 }

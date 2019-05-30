@@ -1,20 +1,10 @@
 import { 
-  UPDATE_HEADER_HEIGHT,
   SET_ANCHOR_OPEN,
   SET_SIDEBAR_OPEN, 
   SET_SIDEBAR_DOCKED, 
   ON_SIDEBAR_CONTENT_EXPAND, 
-  // SET_POST_PAGE_ON, 
-  // SET_POST_PAGE_OFF
+  ON_CHANGE_MENU_STATE,
 } from "./actionTypes";
-
-// header
-export const updateHeaderHeight = (height) => ({
-  type: UPDATE_HEADER_HEIGHT,
-  payload: {
-    headerHeight: height
-  }
-})
 
 // anchor
 export const onSetAnchorOpen = (open) => ({
@@ -45,11 +35,10 @@ export const onSidebarContentExpand = (expandedKey) => ({
   }
 })
 
-// content
-// export const setPostPageOn = () => ({
-//   type: SET_POST_PAGE_ON
-// })
-
-// export const setPostPageOff = () => ({
-//   type: SET_POST_PAGE_OFF
-// })
+// menu
+export const onChangeMenuState = (nItem) => ({
+  type: ON_CHANGE_MENU_STATE,
+  payload: {
+    nItem: nItem,
+  }
+})

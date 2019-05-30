@@ -14,6 +14,10 @@ Boilerplate for markdown-based website (Documentation, Blog, etc.).  Based on [g
 * Optional Sidebar
 * Optional Anchor
 * Demo refresh bug
+* Sidebar items order
+* Search Funtionality
+* Responsive menuitems
+* More examples
 
 ## Plugins
 * gatsby-image
@@ -21,6 +25,7 @@ Boilerplate for markdown-based website (Documentation, Blog, etc.).  Based on [g
 * gatsby-plugin-offline
 * gatsby-plugin-react-helmet
 * gatsby-plugin-sharp
+* gatsby-remark-images
 * gatsby-remark-autolink-headers
 * gatsby-remark-katex
 * gatsby-source-filesystem
