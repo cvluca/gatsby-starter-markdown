@@ -87,6 +87,7 @@ class Menu extends Component {
                         <Link
                           to={item.link}
                           style={{ color: 'white', textDecoration: 'none' }}
+                          onClick={() => {this.onChangeMenuState(menuItems.length)}}
                         >
                           {item.name}
                         </Link>

@@ -23,7 +23,6 @@ class Header extends Component {
           height: (menuOpen && !sidebarDocked) ? nMenuItem*32 + 50 : 55,
           marginBottom: 20,
           background: 'cornflowerblue',
-          overflow: 'auto',
         }}
       >
         <div
