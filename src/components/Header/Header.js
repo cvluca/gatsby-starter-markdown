@@ -1,40 +1,43 @@
 import React, { Component } from 'react'
 import { Link } from 'gatsby';
-import sizeMe  from 'react-sizeme';
-import { connect } from "react-redux";
-import { updateHeaderHeight } from '../../actions/layout';
 import Menu from '../Menu';
+import { getMenuState } from '../../store/selectors';
+import { connect } from 'react-redux';
 
 class Header extends Component {
-  componentDidUpdate = () => {
-    this.props.updateHeaderHeight(this.props.size.height)
-  }
 
   render() {
-    const { siteTitle } = this.props
-    return(
+    const { 
+      siteTitle,
+      sidebarDocked,
+      menuOpen,
+      nMenuItem,
+    } = this.props
+    
+    return (
       <div
         style={{
-          position: "fixed",
-          top: 0,
+            // position: "fixed",
+            // top: 0,
           width: "100%",
-          zIndex: 1000,
+          height: (menuOpen && !sidebarDocked) ? nMenuItem*32 + 50 : 55,
+          marginBottom: 20,
           background: 'cornflowerblue',
-          marginBottom: '1.45rem',
         }}
       >
         <div
           style={{
             margin: '0 auto',
             maxWidth: 1360,
-            padding: '0.8rem 1.0875rem',
+            padding: '15px 18px',
+            whiteSpace: 'nowrap',
           }}
         >
           <div style={{
             float: 'left',
-            marginBottom: '0.8em',
+            marginBottom: '10px',
           }}>
-            <h1 style={{ margin: 0, fontSize: "1.25rem"}}>
+            <h1 style={{ margin: 0, fontSize: "1.25rem" }}>
               <Link
                 to="/"
                 style={{
@@ -46,15 +49,18 @@ class Header extends Component {
               </Link>
             </h1>
           </div>
-          <Menu />
+          <Menu sidebarDocked={sidebarDocked}/>
         </div>
       </div>
     )
   }
 }
 
-const mapDispatchToProps = {
-  updateHeaderHeight
+const mapStateToProps = (state) => {
+  return {
+    menuOpen: getMenuState(state).open,
+    nMenuItem: getMenuState(state).nItem,
+  }
 }
 
-export default connect(()=>({}), mapDispatchToProps) (sizeMe({monitorHeight: true})(Header))
+export default connect(mapStateToProps) (Header);

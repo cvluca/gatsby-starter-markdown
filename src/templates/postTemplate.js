@@ -18,7 +18,7 @@ function Template({
   }
 
   return (
-    <Layout sidebarRoot={frontmatter.root}>
+    <Layout sidebarRoot={frontmatter.root} onPostPage={true} slug={markdownRemark.fields.slug} >
     <div className="blog-post-container">
       <div className="blog-post">
         {/* <h1>{frontmatter.title}</h1>
