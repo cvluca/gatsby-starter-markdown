@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getMenuState } from '../../store/selectors';
+import { getMenuState, getContentState } from '../../store/selectors';
 
 class Container extends Component {
   render() {
@@ -42,6 +42,7 @@ const mapStateToProps = (state) => {
   return {
     menuOpen: getMenuState(state).open,
     nMenuItem: getMenuState(state).nItem,
+    onPostPage: getContentState(state).onPostPage,
   }
 }
 
