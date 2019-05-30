@@ -76,7 +76,7 @@ class ResponsiveTopBar extends Component {
       {sidebarOpen &&
         <div style={{
           position: "fixed",
-          top: menuOpen ? nMenuItem*29 + 97 : 95,
+          top: menuOpen ? nMenuItem*32 + 90 : 95,
           left: 0,
           right: 0,
           bottom: 0,
@@ -100,7 +100,7 @@ class ResponsiveTopBar extends Component {
       {anchorOpen &&
         <div style={{
           position: "fixed",
-          top: menuOpen ? nMenuItem*29 + 97 : 95,
+          top: menuOpen ? nMenuItem*32 + 90 : 95,
           left: 0,
           right: 0,
           bottom: 0,

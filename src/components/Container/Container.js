@@ -16,7 +16,7 @@ class Container extends Component {
           style={{
             position: "absolute",
             top: (!sidebarDocked && onPostPage) ? 
-              (menuOpen ? nMenuItem*29 + 97 : 95): (menuOpen ? nMenuItem*29 + 82 : 80),
+              (menuOpen ? nMenuItem*32 + 90 : 95): (menuOpen ? nMenuItem*32 + 75 : 80),
             left: 0,
             right: 0,
             bottom: 0,
