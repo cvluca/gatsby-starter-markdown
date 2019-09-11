@@ -22,7 +22,7 @@ class Menu extends Component {
       <StaticQuery
         query={graphql`
           query {
-            allMenuItems {
+            allMenuItemsJson {
               edges {
                 node {
                   name
@@ -33,7 +33,7 @@ class Menu extends Component {
           }
         `}
         render={data => {
-          const menuItems = data.allMenuItems.edges.map(edge => edge.node)
+          const menuItems = data.allMenuItemsJson.edges.map(edge => edge.node)
           return (
             <div>
             {sidebarDocked &&

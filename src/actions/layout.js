@@ -4,6 +4,7 @@ import {
   SET_SIDEBAR_DOCKED, 
   ON_SIDEBAR_CONTENT_EXPAND, 
   ON_CHANGE_MENU_STATE,
+  SET_SIDEBAR_ENTRY,
 } from "./actionTypes";
 
 // anchor
@@ -25,6 +26,11 @@ export const onSetSidebarDocked = (docked) => ({
   payload: {
     sidebarDocked: docked,
   }
+})
+
+export const onSetSidebarEntry = (entry) => ({
+  type: SET_SIDEBAR_ENTRY,
+  payload: { sidebarEntry: entry }
 })
 
 export const onSidebarContentExpand = (expandedKey) => ({

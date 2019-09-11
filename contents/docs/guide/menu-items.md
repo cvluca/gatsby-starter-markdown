@@ -2,6 +2,7 @@
 title: Menu Items
 root: "/docs"
 parents: ["Guide"]
+sidebar: "Docs"
 ---
 <h1 align="center">
   Menu Items

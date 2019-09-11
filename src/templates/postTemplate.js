@@ -2,23 +2,24 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout";
 import { connect } from 'react-redux'
-import { onSidebarContentExpand } from '../actions/layout'
+import { onSidebarContentExpand, onSetSidebarEntry } from '../actions/layout'
 import "katex/dist/katex.min.css"
-import { getSidebarExpandedKey } from "../store/selectors";
+import { getSidebarExpandedKey, getSidebarEntry } from "../store/selectors";
 
 function Template({
   data, // this prop will be injected by the GraphQL query below.
   onSidebarContentExpand,
   expandedKey,
+  onSetSidebarEntry,
+  sidebarEntry
 }) {
   const { markdownRemark } = data // data.markdownRemark holds our post data
   const { frontmatter, html, id } = markdownRemark
-  if (expandedKey !== id) {
-    onSidebarContentExpand(id)
-  }
+  if (expandedKey != id) onSidebarContentExpand(id)
+  if (sidebarEntry != frontmatter.sidebar) onSetSidebarEntry(frontmatter.sidebar)
 
   return (
-    <Layout sidebarRoot={frontmatter.root} onPostPage={true} slug={markdownRemark.fields.slug} >
+    <Layout onPostPage={true}>
     <div className="blog-post-container">
       <div className="blog-post">
         {/* <h1>{frontmatter.title}</h1>
@@ -35,12 +36,14 @@ function Template({
 
 const mapStateToProps = (state) => {
   return {
-    expandedKey : getSidebarExpandedKey(state)
+    expandedKey: getSidebarExpandedKey(state),
+    sidebarEntry: getSidebarEntry(state)
   }
 }
 
 const mapDispatchToProps = {
   onSidebarContentExpand,
+  onSetSidebarEntry
 }
 
 export default connect(mapStateToProps, mapDispatchToProps) (Template)
@@ -57,6 +60,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         title
         root
+        sidebar
       }
     }
   }

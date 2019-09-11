@@ -9,54 +9,6 @@ import './SidebarContents.css'
 
 const SubMenu = Menu.SubMenu
 
-const convertToTree = (data) => {
-  const list = data.map(edge => {
-      return ({
-        path: edge.node.fields.slug,
-        key: edge.node.id,
-        title: edge.node.frontmatter.title,
-        parents: edge.node.frontmatter.parents
-      })
-    })
-  return constructTree(list)
-}
-
-const constructTree = (list) => {
-  let tree = []
-  let dir = []
-  list.forEach(item => {
-    if (item.parents === [] || item.parents === null) tree.push(item)
-    else {
-      let subtree = tree
-      for (let i = 0; i < item.parents.length; i++) {
-        if (subtree
-          .filter(node => node.title === item.parents[i] && node.children)
-          .length === 0) {
-          const newNode = {
-            key: "tree/" + item.parents[i],
-            title: item.parents[i],
-            children: []
-          }
-          subtree.push(newNode)
-          dir.push(newNode)
-        }
-        subtree = subtree.find(node => node.title === item.parents[i] && node.children).children
-      }
-      subtree.push(item)
-    }
-  })
-  return [tree, dir]
-}
-
-const sortTree = tree => {
-  tree.sort((a,b)=> {
-    if (((a.children && b.children) || 
-    (!a.children && !b.children)) &&
-    a.title > b.title) return 1
-    else if (a.children) return 1
-    return -1
-  })
-}
 
 class SidebarContents extends Component {
   onSetSidebarOpen = () => {
@@ -64,66 +16,110 @@ class SidebarContents extends Component {
   }
 
   render() {
-    const { expandedKey } = this.props.sidebar
-    const { 
-      root,
-      slug,
-    } = this.props
+    const { expandedKey, entry } = this.props.sidebar
 
     return (
       <StaticQuery
         query={graphql`
           query sidebarContentQuery {
             allMarkdownRemark(sort: { order: ASC, fields: [fields___slug] }) {
-              edges {
-                node {
-                  fields {
-                    slug
-                  }
-                  id
-                  frontmatter {
-                    title
-                    parents
-                  }
+              nodes {
+                fields {
+                  slug
                 }
+                id
+                frontmatter {
+                  title
+                }
+              }
+            }
+            allSidebarsJson {
+              nodes {
+                id
+                name
+                entry
+                child_entries
+                items
               }
             }
           }
         `}
         render={data => {
-          const [tree, dir] = convertToTree(data.allMarkdownRemark.edges.filter(node => 
-            node.node.fields.slug.startsWith(root)
-          ))
-          sortTree(tree)
-          const loop = data => data.map((item) => {
-            if (item.children) {
-              sortTree(item.children)
-              return (
-                <SubMenu key={item.key} title={<span style={{fontWeight:900}}>{item.title}</span>}>
-                  {loop(item.children)}
-                </SubMenu>
-              )
+          const entries = data.allSidebarsJson.nodes
+          const pages = data.allMarkdownRemark.nodes
+          let defaultOpenKeys = []
+          const selectedKeys = [expandedKey]
+
+          const convertToTree = (entry) => {
+            const rootEntry = getEntry(entry)
+            const child_dir = rootEntry.child_entries ?
+              rootEntry.child_entries.map(item => convertToTree(item)) : null
+            let children = itemToNode(rootEntry)
+            if (children && child_dir) children = children.concat(child_dir)
+            else if (children === null) children = child_dir
+            return {
+              key: rootEntry.id,
+              title: rootEntry.name,
+              children: children
             }
-            return (
-              <Menu.Item key={item.key}>
-                <Link to={item.path} onClick={this.onSetSidebarOpen}>{item.title}</Link>
-              </Menu.Item>
-            )
-          })
-          const selectedKeys = data.allMarkdownRemark.edges
-            .filter(item => slug === item.node.fields.slug ||
-              (slug.slice(0,-1) === item.node.fields.slug && slug.slice(-1) === '/'))
-            .length > 0 ? [expandedKey] : []
-          const defaultOpenKeys = dir.map(item => item.key)
+          }
+
+          const getEntry = (entry) => {
+            for (let item in entries) {
+              if (entries[item].name === entry) return entries[item]
+            }
+            return null
+          }
+
+          const itemToNode = (entry) => {
+            if (entry.items == null) return null
+            return entry.items.map(item => {
+              return getPage("/" + item, entry.id)
+            })
+          }
+
+          const getPage = (path, parent) => {
+            for (let item in pages) {
+              if (pages[item].fields.slug === path) {
+                if (pages[item].id === expandedKey) defaultOpenKeys.push(parent)
+                return ({
+                  path: pages[item].fields.slug,
+                  key: pages[item].id,
+                  title: pages[item].frontmatter.title,
+                })
+              }
+            }
+            return null
+          }
+          const tree = convertToTree(entry)
+
+          const loop = root => {
+            if (root.children) {
+              return root.children.map(item => {
+                if (item.path) {
+                  return (
+                    <Menu.Item key={item.key}>
+                      <Link to={item.path} onClick={this.onSetSidebarOpen}>{item.title}</Link>
+                    </Menu.Item>
+                  )
+                }
+                return (
+                  <SubMenu key={item.key} title={<span style={{fontWeight:900}}>{item.title}</span>}>
+                    {loop(item)}
+                  </SubMenu>
+                )
+              })
+            }
+          }
           return (
-              <Menu 
-                mode="inline"
-                defaultOpenKeys={defaultOpenKeys}
-                selectedKeys={selectedKeys}
-                inlineIndent={12}
-              >
-                {loop(tree)}
-              </Menu>
+            <Menu 
+              mode="inline"
+              defaultOpenKeys={defaultOpenKeys}
+              selectedKeys={selectedKeys}
+              inlineIndent={12}
+            >
+              {loop(tree)}
+            </Menu>
           )
         }}
       />
@@ -133,7 +129,7 @@ class SidebarContents extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    sidebar: getSidebarState(state)
+    sidebar: getSidebarState(state),
   }
 }
 

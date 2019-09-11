@@ -2,6 +2,7 @@
 title: Quick Start
 root: "/docs"
 parents: ["Get Started"]
+sidebar: "Docs"
 ---
 <h1 align="center">
   Quick Start

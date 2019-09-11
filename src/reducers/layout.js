@@ -4,6 +4,7 @@ import {
   SET_SIDEBAR_DOCKED,
   ON_SIDEBAR_CONTENT_EXPAND,
   ON_CHANGE_MENU_STATE,
+  SET_SIDEBAR_ENTRY,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
     expandedKey: '',
     searchValue: '',
     autoExpandParent: true,
+    entry: null,
   },
   menu : { open : false },
 }
@@ -49,6 +51,15 @@ export default function(state=initialState, action) {
           ...state.sidebar,
           docked: action.payload.sidebarDocked,
           open: action.payload.sidebarOpen
+        }
+      }
+    }
+    case SET_SIDEBAR_ENTRY: {
+      return {
+        ...state,
+        sidebar: {
+          ...state.sidebar,
+          entry: action.payload.sidebarEntry
         }
       }
     }

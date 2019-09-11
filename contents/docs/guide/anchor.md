@@ -2,6 +2,7 @@
 title: Anchor
 root: "/docs"
 parents: ["Guide"]
+sidebar: "Docs"
 ---
 <h1 align="center">
   Anchor

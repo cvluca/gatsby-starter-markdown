@@ -2,6 +2,7 @@
 title: Introduction
 root: "/docs"
 parents: ["Get Started"]
+sidebar: "Docs"
 ---
 <h1 align="center">
   Introduction

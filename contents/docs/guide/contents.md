@@ -2,6 +2,7 @@
 title: Contents
 root: "/docs"
 parents: ["Guide"]
+sidebar: "Docs"
 ---
 <h1 align="center">
   Contents
