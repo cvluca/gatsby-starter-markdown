@@ -1,0 +1,1 @@
+{"errors":[{"message":"Field \"root\" is not defined by type MarkdownRemarkFrontmatterFilterInput.","locations":[{"line":4,"column":95}]}],"pageContext":{"isCreatedByStatefulCreatePages":true}}
