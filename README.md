@@ -13,7 +13,6 @@ Boilerplate for markdown-based website (Documentation, Blog, etc.).  Based on [g
 * Footer
 * Optional Sidebar
 * Optional Anchor
-* Sidebar items order
 * Search Funtionality
 * More examples
 
