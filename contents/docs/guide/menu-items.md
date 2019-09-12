@@ -1,13 +1,8 @@
 ---
 title: Menu Items
-root: "/docs"
-parents: ["Guide"]
 sidebar: "Docs"
+showTitle: true
 ---
-<h1 align="center">
-  Menu Items
-</h1>
-
 ## Introduction
 
 The menu items are showing on the top right of the website (currently have `Docs` and `Blog`).

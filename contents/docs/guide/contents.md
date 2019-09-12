@@ -1,13 +1,8 @@
 ---
 title: Contents
-root: "/docs"
-parents: ["Guide"]
 sidebar: "Docs"
+showTitle: true
 ---
-<h1 align="center">
-  Contents
-</h1>
-
 ## Source of contents
 
   All contents are stored under `/contents`. To change the root path, modify the following part in `gatsby-config.js`, simply by replace the `path` of it.

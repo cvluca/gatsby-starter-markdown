@@ -1,13 +1,8 @@
 ---
 title: Anchor
-root: "/docs"
-parents: ["Guide"]
 sidebar: "Docs"
+showTitle: true
 ---
-<h1 align="center">
-  Anchor
-</h1>
-
 ## Introduction
 Anchor will automatically generate for your markdown pages based on headings.
 

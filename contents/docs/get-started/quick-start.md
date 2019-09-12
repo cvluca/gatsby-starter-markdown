@@ -1,13 +1,8 @@
 ---
 title: Quick Start
-root: "/docs"
-parents: ["Get Started"]
 sidebar: "Docs"
+showTitle: true
 ---
-<h1 align="center">
-  Quick Start
-</h1>
-
 The website is based on Gatsby, full documentation for Gatsby lives [on the website](https://gatsbyjs.org/).
 
 ## Create a Gatsby site.

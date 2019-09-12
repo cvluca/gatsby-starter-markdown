@@ -1,9 +1,8 @@
 ---
 date: "2019-02-13"
 title: First Blog
-root: "/blog"
+rootPage: "/blog"
 sidebar: "Blog"
+showTitle: true
 ---
-# First Blog
-
 [Next Blog](/blog/second-blog)
