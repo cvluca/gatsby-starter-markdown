@@ -28,7 +28,7 @@ The information of the page is stored on the top of the markdown files used to g
 
 You can add any additional information and querying with GraphQL. For blog in the example:
 
-* `rootPage`: is used to filter the posts by the root page (i.e. /blog)
+* `rootPage`: is used to filter the posts by the root page (i.e. [/blog](/blog))
 
 ### Example
 
@@ -42,7 +42,7 @@ showTitle: true
 ---
 ```
 
-Some information is not used (i.e. date), so this file don't have it.
+Some information is not used (i.e. date), so this file doesn't have it.
 
 ## Important to notice
 
