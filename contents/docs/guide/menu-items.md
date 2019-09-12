@@ -1,12 +1,8 @@
 ---
 title: Menu Items
-root: "/docs"
-parents: ["Guide"]
+sidebar: Docs
+showTitle: true
 ---
-<h1 align="center">
-  Menu Items
-</h1>
-
 ## Introduction
 
 The menu items are showing on the top right of the website (currently have `Docs` and `Blog`).
@@ -16,6 +12,7 @@ It is automatically generated base on `menuItems.json` file under the folder `/s
 ### Example
 
 See the current file. `Docs` is linked directly to the markdown page, and `Blog` is linked to a custom page under `/src/components/pages`.
+
 ```sh
 # /src/menuItems/menuItems.json
 [

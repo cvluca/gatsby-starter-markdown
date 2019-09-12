@@ -1,15 +1,13 @@
 ---
 title: Introduction
-root: "/docs"
-parents: ["Get Started"]
+sidebar: Docs
+showTitle: true
 ---
-<h1 align="center">
-  Introduction
-</h1>
-
-Gatsby Markdown Starter is a bolierplate for markdown-based website (i.e. Documentation, Blog, etc.).
+Gatsby Markdown Starter is a boilerplate for markdown-based website (i.e. Documentation, Blog, etc.).
 
 ## Features
+
 * Responsive Web Design
 * Automatically generate Sidebar
 * Automatically generate Anchor
+* Simple usage

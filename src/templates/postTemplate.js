@@ -2,27 +2,28 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout";
 import { connect } from 'react-redux'
-import { onSidebarContentExpand } from '../actions/layout'
+import { onSidebarContentSelected, onSetSidebarContentEntry } from '../actions/layout'
 import "katex/dist/katex.min.css"
-import { getSidebarExpandedKey } from "../store/selectors";
+import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 
 function Template({
   data, // this prop will be injected by the GraphQL query below.
-  onSidebarContentExpand,
-  expandedKey,
+  onSidebarContentSelected,
+  selectedKey,
+  onSetSidebarContentEntry,
+  sidebarEntry
 }) {
   const { markdownRemark } = data // data.markdownRemark holds our post data
   const { frontmatter, html, id } = markdownRemark
-  if (expandedKey !== id) {
-    onSidebarContentExpand(id)
-  }
+  if (selectedKey !== id) onSidebarContentSelected(id)
+  if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
   return (
-    <Layout sidebarRoot={frontmatter.root} onPostPage={true} slug={markdownRemark.fields.slug} >
+    <Layout onPostPage={true}>
     <div className="blog-post-container">
       <div className="blog-post">
-        {/* <h1>{frontmatter.title}</h1>
-        <h5>{frontmatter.date}</h5> */}
+        { frontmatter.showTitle ? <h1 align="center">{frontmatter.title}</h1> : null }
+        {/* <h5>{frontmatter.date}</h5> */}
         <div
           className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: html }}
@@ -35,12 +36,14 @@ function Template({
 
 const mapStateToProps = (state) => {
   return {
-    expandedKey : getSidebarExpandedKey(state)
+    selectedKey: getSidebarSelectedKey(state),
+    sidebarEntry: getSidebarEntry(state)
   }
 }
 
 const mapDispatchToProps = {
-  onSidebarContentExpand,
+  onSidebarContentSelected,
+  onSetSidebarContentEntry
 }
 
 export default connect(mapStateToProps, mapDispatchToProps) (Template)
@@ -56,7 +59,8 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
-        root
+        sidebar
+        showTitle
       }
     }
   }

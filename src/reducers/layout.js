@@ -2,19 +2,24 @@ import {
   SET_ANCHOR_OPEN,
   SET_SIDEBAR_OPEN, 
   SET_SIDEBAR_DOCKED,
-  ON_SIDEBAR_CONTENT_EXPAND,
+  SET_SIDEBAR_CONTENT_ENTRY,
+  SET_SIDEBAR_CONTENT_STRUCTURE,
+  ON_SIDEBAR_CONTENT_EXPANDED,
   ON_CHANGE_MENU_STATE,
+  ON_SIDEBAR_CONTENT_SELECTED,
 } from "../actions/actionTypes";
 
 const initialState = {
-  header: { height: 0 },
   anchor: { open: false },
   sidebar: {
     docked: false,
     open: false,
-    expandedKey: '',
-    searchValue: '',
-    autoExpandParent: true,
+    expandedKeys: [],
+    selectedKey: '',
+    entry: null,
+    selectedEntry: null,
+    contentTree: null,
+    contentDir: []
   },
   menu : { open : false },
 }
@@ -52,13 +57,41 @@ export default function(state=initialState, action) {
         }
       }
     }
-    case ON_SIDEBAR_CONTENT_EXPAND: {
+    case SET_SIDEBAR_CONTENT_ENTRY: {
       return {
         ...state,
         sidebar: {
           ...state.sidebar,
-          expandedKey: action.payload.expandedKey,
-          autoExpandParent: action.payload.autoExpandParent
+          entry: action.payload.sidebarEntry
+        }
+      }
+    }
+    case SET_SIDEBAR_CONTENT_STRUCTURE: {
+      return {
+        ...state,
+        sidebar: {
+          ...state.sidebar,
+          selectedEntry: action.payload.selectedEntry,
+          contentTree: action.payload.sidebarTree,
+          contentDir: action.payload.sidebarDir
+        }
+      }
+    }
+    case ON_SIDEBAR_CONTENT_EXPANDED: {
+      return {
+        ...state,
+        sidebar: {
+          ...state.sidebar,
+          expandedKeys: action.payload.expandedKeys,
+        }
+      }
+    }
+    case ON_SIDEBAR_CONTENT_SELECTED: {
+      return {
+        ...state,
+        sidebar: {
+          ...state.sidebar,
+          selectedKey: action.payload.selectedKey,
         }
       }
     }

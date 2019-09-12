@@ -11,12 +11,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    {
-      resolve: `gatsby-transformer-json`,
-      options: {
-        typeName: `MenuItems`, // a fixed string
-      },
-    },
+    `gatsby-transformer-json`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -29,6 +24,13 @@ module.exports = {
       options: {
         name: `contents`,
         path: `${__dirname}/contents`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `sidebars`,
+        path: `${__dirname}/src/sidebars`,
       },
     },
     'gatsby-transformer-sharp',
@@ -73,5 +75,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
   ],
-  pathPrefix: '/',
 }

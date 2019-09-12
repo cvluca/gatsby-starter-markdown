@@ -24,7 +24,7 @@ export const pageQuery = graphql`
   query($path: String!) {
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date] }
-      filter: { frontmatter: { root: {eq: $path }}}
+      filter: { frontmatter: { rootPage: {eq: $path }}}
     ) {
       edges {
         node {
@@ -36,6 +36,7 @@ export const pageQuery = graphql`
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             title
+            rootPage
           }
         }
       }

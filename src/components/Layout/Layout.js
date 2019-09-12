@@ -21,9 +21,7 @@ class Layout extends Component {
   render () {
     const {
       children,
-      sidebarRoot,
       onPostPage,
-      slug,
     } = this.props
 
     return (
@@ -68,7 +66,7 @@ class Layout extends Component {
                       </Col>
                       <Col>
                         {(matches && onPostPage) ?
-                          <ResponsiveTopBar root={sidebarRoot} slug={slug}/>
+                          <ResponsiveTopBar/>
                           : null
                         }
                       </Col>
@@ -78,7 +76,7 @@ class Layout extends Component {
                   {(!matches && onPostPage) ?
                     <AntdLayout>
                       <AntdLayout.Sider>
-                        <ResponsiveSidebar root={sidebarRoot} slug={slug}/>
+                        <ResponsiveSidebar/>
                       </AntdLayout.Sider>
                       <AntdLayout.Content
                         style={{

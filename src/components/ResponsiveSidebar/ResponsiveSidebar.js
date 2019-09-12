@@ -3,10 +3,6 @@ import SidebarContents from "../SidebarContents";
 
 class ResponsiveSidebar extends Component {
   render() {
-    const { 
-      root,
-      slug,
-    } = this.props
 
     return (
       <div style={{
@@ -24,7 +20,7 @@ class ResponsiveSidebar extends Component {
           top:0,
           bottom:0
         }}>
-          <SidebarContents root={root} slug={slug}/>
+          <SidebarContents/>
         </div>
       </div>
     )

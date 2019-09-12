@@ -1,13 +1,10 @@
 ---
 title: Anchor
-root: "/docs"
-parents: ["Guide"]
+sidebar: Docs
+showTitle: true
 ---
-<h1 align="center">
-  Anchor
-</h1>
-
 ## Introduction
+
 Anchor will automatically generate for your markdown pages based on headings.
 
 To create a heading, add one to six `#` symbols before your heading text. The number of `#` you use will determine the size of the heading.

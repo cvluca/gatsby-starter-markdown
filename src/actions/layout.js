@@ -2,8 +2,11 @@ import {
   SET_ANCHOR_OPEN,
   SET_SIDEBAR_OPEN, 
   SET_SIDEBAR_DOCKED, 
-  ON_SIDEBAR_CONTENT_EXPAND, 
+  SET_SIDEBAR_CONTENT_ENTRY,
+  ON_SIDEBAR_CONTENT_EXPANDED, 
+  ON_SIDEBAR_CONTENT_SELECTED,
   ON_CHANGE_MENU_STATE,
+  SET_SIDEBAR_CONTENT_STRUCTURE,
 } from "./actionTypes";
 
 // anchor
@@ -22,17 +25,31 @@ export const onSetSidebarOpen = (open) => ({
 
 export const onSetSidebarDocked = (docked) => ({
   type: SET_SIDEBAR_DOCKED,
+  payload: { sidebarDocked: docked }
+})
+
+export const onSetSidebarContentEntry = (entry) => ({
+  type: SET_SIDEBAR_CONTENT_ENTRY,
+  payload: { sidebarEntry: entry }
+})
+
+export const onSetSidebarContentStructure = (entry, tree, dir) => ({
+  type: SET_SIDEBAR_CONTENT_STRUCTURE,
   payload: {
-    sidebarDocked: docked,
+    sidebarTree: tree,
+    sidebarDir: dir,
+    selectedEntry: entry
   }
 })
 
-export const onSidebarContentExpand = (expandedKey) => ({
-  type: ON_SIDEBAR_CONTENT_EXPAND,
-  payload: {
-    expandedKey,
-    autoExpandParent: false
-  }
+export const onSidebarContentExpanded = (keys) => ({
+  type: ON_SIDEBAR_CONTENT_EXPANDED,
+  payload: { expandedKeys: keys }
+})
+
+export const onSidebarContentSelected = (key) => ({
+  type: ON_SIDEBAR_CONTENT_SELECTED,
+  payload: { selectedKey: key }
 })
 
 // menu
