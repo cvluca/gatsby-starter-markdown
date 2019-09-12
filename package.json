@@ -43,7 +43,8 @@
   "devDependencies": {
     "gatsby-plugin-remove-trailing-slashes": "^2.1.6",
     "gh-pages": "^2.1.1",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "mem": ">=4.0.0"
   },
   "repository": {
     "type": "git",
