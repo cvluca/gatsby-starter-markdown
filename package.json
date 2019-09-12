@@ -5,26 +5,28 @@
   "author": "Luca(Wei) Chen <wei@cvluca.com>",
   "dependencies": {
     "antd": "^3.23.2",
-    "gatsby": "^2.7.5",
-    "gatsby-cli": "^2.6.3",
-    "gatsby-image": "^2.1.2",
-    "gatsby-plugin-manifest": "^2.1.1",
-    "gatsby-plugin-offline": "^2.1.1",
-    "gatsby-plugin-react-helmet": "^3.0.12",
-    "gatsby-plugin-sharp": "^2.1.2",
-    "gatsby-remark-autolink-headers": "^2.0.16",
-    "gatsby-remark-images": "^3.0.14",
-    "gatsby-remark-katex": "^3.0.4",
-    "gatsby-source-filesystem": "^2.0.37",
-    "gatsby-transformer-json": "^2.1.11",
-    "gatsby-transformer-remark": "^2.3.12",
-    "gatsby-transformer-sharp": "^2.1.20",
+    "eslint-plugin-flowtype": "^2.50.3",
+    "gatsby": "^2.15.14",
+    "gatsby-cli": "^2.7.47",
+    "gatsby-image": "^2.2.18",
+    "gatsby-plugin-manifest": "^2.2.16",
+    "gatsby-plugin-offline": "^2.2.10",
+    "gatsby-plugin-react-helmet": "^3.1.7",
+    "gatsby-plugin-sharp": "^2.2.21",
+    "gatsby-remark-autolink-headers": "^2.1.10",
+    "gatsby-remark-images": "^3.1.21",
+    "gatsby-remark-katex": "^3.1.8",
+    "gatsby-source-filesystem": "^2.1.22",
+    "gatsby-transformer-json": "^2.2.8",
+    "gatsby-transformer-remark": "^2.6.22",
+    "gatsby-transformer-sharp": "^2.2.14",
     "katex": "^0.10.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
-    "react-redux": "^7.0.3",
-    "react-responsive": "^6.1.2"
+    "react-redux": "^7.1.1",
+    "react-responsive": "^6.1.2",
+    "typescript": "^3.6.3"
   },
   "keywords": [
     "gatsby"
@@ -39,9 +41,9 @@
     "deploy": "gatsby build --prefix-paths && gh-pages -d public"
   },
   "devDependencies": {
-    "gatsby-plugin-remove-trailing-slashes": "^2.0.11",
-    "gh-pages": "^2.0.1",
-    "prettier": "^1.17.1"
+    "gatsby-plugin-remove-trailing-slashes": "^2.1.6",
+    "gh-pages": "^2.1.1",
+    "prettier": "^1.18.2"
   },
   "repository": {
     "type": "git",
