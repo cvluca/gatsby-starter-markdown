@@ -2,6 +2,8 @@
 title: Introduction
 sidebar: Docs
 showTitle: true
+hideAnchor: false
+hideSidebar: false
 ---
 Gatsby Markdown Starter is a boilerplate for markdown-based website (i.e. Documentation, Blog, etc.).
 

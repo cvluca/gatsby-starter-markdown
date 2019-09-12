@@ -7,6 +7,8 @@ import {
   ON_SIDEBAR_CONTENT_SELECTED,
   ON_CHANGE_MENU_STATE,
   SET_SIDEBAR_CONTENT_STRUCTURE,
+  SET_SIDEBAR_HIDE,
+  SET_ANCHOR_HIDE,
 } from "./actionTypes";
 
 // anchor
@@ -15,6 +17,11 @@ export const onSetAnchorOpen = (open) => ({
   payload: {
     anchorOpen: open
   }
+})
+
+export const onSetAnchorHide = (hide) => ({
+  type: SET_ANCHOR_HIDE,
+  payload: { anchorHide: hide }
 })
 
 // sidebar
@@ -26,6 +33,11 @@ export const onSetSidebarOpen = (open) => ({
 export const onSetSidebarDocked = (docked) => ({
   type: SET_SIDEBAR_DOCKED,
   payload: { sidebarDocked: docked }
+})
+
+export const onSetSidebarHide = (hide) => ({
+  type: SET_SIDEBAR_HIDE,
+  payload: { sidebarHide: hide }
 })
 
 export const onSetSidebarContentEntry = (entry) => ({

@@ -9,9 +9,11 @@ import Container from '../Container';
 import ResponsiveAnchor from '../ResponsiveAnchor';
 import ResponsiveTopBar from '../ResponsiveTopBar';
 import MediaQuery from "react-responsive";
+import { connect } from "react-redux"
 import { default as AntdLayout } from 'antd/lib/layout';
 import Row from 'antd/lib/row';
 import Col from 'antd/lib/col'
+import { isSidebarHide, isAnchorHide } from '../../store/selectors'
 
 class Layout extends Component {
   setPostPageState = (state) => {
@@ -22,6 +24,8 @@ class Layout extends Component {
     const {
       children,
       onPostPage,
+      anchorHide,
+      sidebarHide
     } = this.props
 
     return (
@@ -64,34 +68,37 @@ class Layout extends Component {
                       <Col>
                         <Header siteTitle={data.site.siteMetadata.title} sidebarDocked={!matches}/>
                       </Col>
-                      <Col>
-                        {(matches && onPostPage) ?
+                      {(matches && onPostPage && (!sidebarHide || !anchorHide)) &&
+                        <Col>
                           <ResponsiveTopBar/>
-                          : null
-                        }
-                      </Col>
+                        </Col>
+                      }
                     </Row>
                   </AntdLayout.Header>
 
                   {(!matches && onPostPage) ?
                     <AntdLayout>
-                      <AntdLayout.Sider>
-                        <ResponsiveSidebar/>
-                      </AntdLayout.Sider>
+                      { !sidebarHide &&
+                        <AntdLayout.Sider>
+                          <ResponsiveSidebar/>
+                        </AntdLayout.Sider>
+                      }
                       <AntdLayout.Content
                         style={{
                           position: "absolute",
-                          left: "20%",
-                          right: "15%",
+                          left: (sidebarHide) ? 0 : "20%",
+                          right: (anchorHide) ? 0 : "15%",
                         }}
                       >
                         <Container sidebarDocked={!matches} onPostPage={onPostPage}>
                           {children}
                         </Container>
                       </AntdLayout.Content>
-                      <AntdLayout.Sider>
-                        <ResponsiveAnchor />
-                      </AntdLayout.Sider>
+                      { !anchorHide &&
+                        <AntdLayout.Sider>
+                          <ResponsiveAnchor />
+                        </AntdLayout.Sider>
+                      }
                     </AntdLayout>
                     :
                     <AntdLayout.Content>
@@ -115,4 +122,11 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+const mapStateToProps = (state) => {
+  return {
+    sidebarHide: isSidebarHide(state),
+    anchorHide: isAnchorHide(state)
+  }
+}
+
+export default connect(mapStateToProps) (Layout)

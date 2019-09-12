@@ -2,21 +2,36 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout";
 import { connect } from 'react-redux'
-import { onSidebarContentSelected, onSetSidebarContentEntry } from '../actions/layout'
 import "katex/dist/katex.min.css"
-import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
+import {
+  onSidebarContentSelected,
+  onSetSidebarContentEntry,
+  onSetSidebarHide,
+  onSetAnchorHide,
+  onSetAnchorOpen,
+  onSetSidebarOpen
+} from '../actions/layout'
 
 function Template({
   data, // this prop will be injected by the GraphQL query below.
   onSidebarContentSelected,
-  selectedKey,
   onSetSidebarContentEntry,
-  sidebarEntry
+  onSetAnchorHide,
+  onSetSidebarHide,
+  onSetAnchorOpen,
+  onSetSidebarOpen,
 }) {
   const { markdownRemark } = data // data.markdownRemark holds our post data
   const { frontmatter, html, id } = markdownRemark
-  if (selectedKey !== id) onSidebarContentSelected(id)
-  if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
+  const sidebarHide = (frontmatter.hideSidebar === null) ? false : frontmatter.hideSidebar
+  const anchorHide = (frontmatter.hideAnchor === null) ? false : frontmatter.hideAnchor
+
+  onSetSidebarHide(sidebarHide)
+  onSetAnchorHide(anchorHide)
+  onSidebarContentSelected(id)
+  onSetSidebarContentEntry(frontmatter.sidebar)
+  onSetSidebarOpen(false)
+  onSetAnchorOpen(false)
 
   return (
     <Layout onPostPage={true}>
@@ -34,19 +49,16 @@ function Template({
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    selectedKey: getSidebarSelectedKey(state),
-    sidebarEntry: getSidebarEntry(state)
-  }
-}
-
 const mapDispatchToProps = {
   onSidebarContentSelected,
-  onSetSidebarContentEntry
+  onSetSidebarContentEntry,
+  onSetAnchorHide,
+  onSetSidebarHide,
+  onSetAnchorOpen,
+  onSetSidebarOpen,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Template)
+export default connect(()=>({}), mapDispatchToProps) (Template)
 
 export const pageQuery = graphql`
   query($path: String!) {
@@ -61,6 +73,8 @@ export const pageQuery = graphql`
         title
         sidebar
         showTitle
+        hideSidebar
+        hideAnchor
       }
     }
   }

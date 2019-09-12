@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Button from 'antd/lib/button'
 import 'antd/lib/button/style/css'
-import { getSidebarState, getAnchorState, getMenuState } from '../../store/selectors';
+import {
+  getSidebarState,
+  getAnchorState,
+  getMenuState,
+  isSidebarHide,
+  isAnchorHide
+} from '../../store/selectors';
 import { onSetAnchorOpen, onSetSidebarOpen } from '../../actions/layout'
 import SidebarContents from '../SidebarContents';
 import TableOfContents from '../TableOfContents';
@@ -30,8 +36,11 @@ class ResponsiveTopBar extends Component {
       anchorOpen,
       menuOpen,
       nMenuItem,
+      sidebarHide,
+      anchorHide
     } = this.props
 
+    if (sidebarHide && anchorHide) return null
     return (
       <div
         style={{
@@ -47,7 +56,7 @@ class ResponsiveTopBar extends Component {
           marginTop: '-20px',
         }}
       >
-        {!anchorOpen &&
+        {!anchorOpen && !sidebarHide &&
           <div style={{
             position: "absolute",
             left: 8,
@@ -58,7 +67,7 @@ class ResponsiveTopBar extends Component {
               <Button icon="bars" onClick={this.onSetSidebarOpen} />
             }
           </div>}
-        {!sidebarOpen &&
+        {!sidebarOpen && !anchorHide &&
           <div style={{
             position: "absolute",
             right: 8,
@@ -122,6 +131,8 @@ const mapStateToProps = (state) => {
     anchorOpen: getAnchorState(state).open,
     menuOpen: getMenuState(state).open,
     nMenuItem: getMenuState(state).nItem,
+    sidebarHide: isSidebarHide(state),
+    anchorHide: isAnchorHide(state),
   }
 }
 

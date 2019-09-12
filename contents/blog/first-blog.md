@@ -4,5 +4,7 @@ title: First Blog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
+hideAnchor: true
+hideSidebar: false
 ---
 [Next Blog](/blog/second-blog)

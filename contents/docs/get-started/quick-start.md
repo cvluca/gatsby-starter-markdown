@@ -2,6 +2,8 @@
 title: Quick Start
 sidebar: Docs
 showTitle: true
+hideAnchor: false
+hideSidebar: false
 ---
 The website is based on Gatsby, full documentation for Gatsby lives [on the website](https://gatsbyjs.org/).
 
