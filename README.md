@@ -11,8 +11,6 @@ Boilerplate for markdown-based website (Documentation, Blog, etc.).  Based on [g
 
 ## TODO
 * Footer
-* Optional Sidebar
-* Optional Anchor
 * Search Funtionality
 * More examples
 
