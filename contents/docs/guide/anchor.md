@@ -22,3 +22,7 @@ The anchor will be generated with different layers based on the size of the head
 Check the anchor on the right.
 
 #### The smaller heading
+
+## Hide Anchor
+
+The anchor can be hide by setting `hideAnchor` on the top of the markdown file (see [contents](/docs/guide/contents#information-of-the-page)).

@@ -2,6 +2,7 @@
 title: Contents
 sidebar: Docs
 showTitle: true
+hideAnchor: false
 ---
 ## Source of contents
 
@@ -22,12 +23,13 @@ showTitle: true
 The information of the page is stored on the top of the markdown files used to generate sidebar, which currently includes the following information:
 
 * `title`: the title of the page
-* `showTitle`: show the title on the center at the beginning
+* `showTitle`: show the title on the center at the beginning (false by default)
+* `sidebar`: entry of the sidebar (see [sidebar](/docs/guide/sidebar))
+* `hideAnchor`: hide anchor (false by default)
+
+If you use the default setting, you should have at least one file contains each setting. You can add any additional information and querying with GraphQL. For blog in the example:
+
 * `date`: the date created
-* `sidebar`: entry of the sidebar (see [sidebar](/docs/guide/sidebar)).
-
-You can add any additional information and querying with GraphQL. For blog in the example:
-
 * `rootPage`: is used to filter the posts by the root page (i.e. [/blog](/blog))
 
 ### Example

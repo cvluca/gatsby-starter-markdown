@@ -23,10 +23,10 @@ function Template({
 }) {
   const { markdownRemark } = data // data.markdownRemark holds our post data
   const { frontmatter, html, id } = markdownRemark
-  const sidebarHide = (frontmatter.hideSidebar === null) ? false : frontmatter.hideSidebar
   const anchorHide = (frontmatter.hideAnchor === null) ? false : frontmatter.hideAnchor
 
-  onSetSidebarHide(sidebarHide)
+  if (frontmatter.sidebar) onSetSidebarHide(false)
+  else onSetSidebarHide(true)
   onSetAnchorHide(anchorHide)
   onSidebarContentSelected(id)
   onSetSidebarContentEntry(frontmatter.sidebar)
@@ -38,7 +38,6 @@ function Template({
     <div className="blog-post-container">
       <div className="blog-post">
         { frontmatter.showTitle ? <h1 align="center">{frontmatter.title}</h1> : null }
-        {/* <h5>{frontmatter.date}</h5> */}
         <div
           className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: html }}
@@ -69,11 +68,9 @@ export const pageQuery = graphql`
       id
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
         title
         sidebar
         showTitle
-        hideSidebar
         hideAnchor
       }
     }
