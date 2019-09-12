@@ -1,9 +1,10 @@
 ---
 title: Anchor
-sidebar: "Docs"
+sidebar: Docs
 showTitle: true
 ---
 ## Introduction
+
 Anchor will automatically generate for your markdown pages based on headings.
 
 To create a heading, add one to six `#` symbols before your heading text. The number of `#` you use will determine the size of the heading.
