@@ -107,7 +107,7 @@ class ResponsiveTopBar extends Component {
           WebkitOverflowScrolling: "touch",
           transition: "left .3s ease-out, right .3s ease-out",
         }}>
-          <TableOfContents offsetTop={0} affix={false}/>
+          <TableOfContents offsetTop={95} affix={false}/>
         </div>
       }
 

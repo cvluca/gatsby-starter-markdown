@@ -72,33 +72,26 @@ class Layout extends Component {
                       </Col>
                     </Row>
                   </AntdLayout.Header>
-
-                  {(!matches && onPostPage) ?
-                    <AntdLayout>
-                      <AntdLayout.Sider>
-                        <ResponsiveSidebar/>
-                      </AntdLayout.Sider>
-                      <AntdLayout.Content
-                        style={{
-                          position: "absolute",
-                          left: "20%",
-                          right: "15%",
-                        }}
-                      >
-                        <Container sidebarDocked={!matches} onPostPage={onPostPage}>
-                          {children}
-                        </Container>
-                      </AntdLayout.Content>
-                      <AntdLayout.Sider>
-                        <ResponsiveAnchor />
-                      </AntdLayout.Sider>
-                    </AntdLayout>
-                    :
-                    <AntdLayout.Content>
-                      <Container sidebarDocked={!matches} onPostPage={onPostPage}>
-                        {children}
-                      </Container>
-                    </AntdLayout.Content>
+                  { !sidebarHide && !matches && onPostPage &&
+                    <AntdLayout.Sider>
+                      <ResponsiveSidebar/>
+                    </AntdLayout.Sider>
+                  }
+                  <AntdLayout.Content
+                    style={{
+                      position: "absolute",
+                      left: (sidebarHide || matches) ? 0 : "20%",
+                      right: (anchorHide || matches) ? 0 : "15%",
+                    }}
+                  >
+                    <Container sidebarDocked={!matches} onPostPage={onPostPage}>
+                      {children}
+                    </Container>
+                  </AntdLayout.Content>
+                  { !anchorHide && !matches && onPostPage &&
+                    <AntdLayout.Sider>
+                      <ResponsiveAnchor />
+                    </AntdLayout.Sider>
                   }
                 </AntdLayout>
               </>)

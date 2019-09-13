@@ -39,10 +39,9 @@ The current page have the following information on the top of the file:
 title: Contents
 sidebar: Docs
 showTitle: true
+hideAnchor: false
 ---
 ```
-
-Some information is not used (i.e. date), so this file doesn't have it.
 
 ## Important to notice
 
