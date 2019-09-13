@@ -2,8 +2,13 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/Layout";
 import { connect } from 'react-redux'
-import { onSidebarContentSelected, onSetSidebarContentEntry } from '../actions/layout'
 import "katex/dist/katex.min.css"
+import {
+  onSidebarContentSelected,
+  onSetSidebarContentEntry,
+  onSetAnchorHide,
+  onSetSidebarHide,
+} from '../actions/layout'
 import { getSidebarSelectedKey, getSidebarEntry } from "../store/selectors";
 
 function Template({
@@ -11,10 +16,19 @@ function Template({
   onSidebarContentSelected,
   selectedKey,
   onSetSidebarContentEntry,
-  sidebarEntry
+  sidebarEntry,
+  onSetAnchorHide,
+  onSetSidebarHide
 }) {
   const { markdownRemark } = data // data.markdownRemark holds our post data
   const { frontmatter, html, id } = markdownRemark
+
+  const hideAnchor = (frontmatter.hideAnchor === null) ? false : frontmatter.hideAnchor
+  const hideSidebar = (frontmatter.sidebar === null) ? true : false
+
+  onSetAnchorHide(hideAnchor)
+  onSetSidebarHide(hideSidebar)
+
   if (selectedKey !== id) onSidebarContentSelected(id)
   if (sidebarEntry !== frontmatter.sidebar) onSetSidebarContentEntry(frontmatter.sidebar)
 
@@ -22,8 +36,7 @@ function Template({
     <Layout onPostPage={true}>
     <div className="blog-post-container">
       <div className="blog-post">
-        { frontmatter.showTitle ? <h1 align="center">{frontmatter.title}</h1> : null }
-        {/* <h5>{frontmatter.date}</h5> */}
+        { frontmatter.showTitle && <h1 align="center">{frontmatter.title}</h1> }
         <div
           className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: html }}
@@ -43,7 +56,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   onSidebarContentSelected,
-  onSetSidebarContentEntry
+  onSetSidebarContentEntry,
+  onSetAnchorHide,
+  onSetSidebarHide
 }
 
 export default connect(mapStateToProps, mapDispatchToProps) (Template)
@@ -61,6 +76,7 @@ export const pageQuery = graphql`
         title
         sidebar
         showTitle
+        hideAnchor
       }
     }
   }

@@ -4,5 +4,6 @@ title: Second Blog
 rootPage: /blog
 sidebar: Blog
 showTitle: true
+hideAnchor: true
 ---
 [Previous Blog](/blog/first-blog)
