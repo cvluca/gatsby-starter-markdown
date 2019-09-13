@@ -11,7 +11,9 @@ import ResponsiveTopBar from '../ResponsiveTopBar';
 import MediaQuery from "react-responsive";
 import { default as AntdLayout } from 'antd/lib/layout';
 import Row from 'antd/lib/row';
-import Col from 'antd/lib/col'
+import Col from 'antd/lib/col';
+import { connect } from 'react-redux';
+import { isSidebarHide, isAnchorHide } from '../../store/selectors';
 
 class Layout extends Component {
   setPostPageState = (state) => {
@@ -22,6 +24,8 @@ class Layout extends Component {
     const {
       children,
       onPostPage,
+      sidebarHide,
+      anchorHide,
     } = this.props
 
     return (
@@ -64,12 +68,9 @@ class Layout extends Component {
                       <Col>
                         <Header siteTitle={data.site.siteMetadata.title} sidebarDocked={!matches}/>
                       </Col>
-                      <Col>
-                        {(matches && onPostPage) ?
-                          <ResponsiveTopBar/>
-                          : null
-                        }
-                      </Col>
+                      {matches && onPostPage && (!anchorHide || !sidebarHide) &&
+                        <Col> <ResponsiveTopBar/> </Col>
+                      }
                     </Row>
                   </AntdLayout.Header>
                   { !sidebarHide && !matches && onPostPage &&
@@ -108,4 +109,11 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+const mapStateToProps = (state) => {
+  return {
+    sidebarHide: isSidebarHide(state),
+    anchorHide: isAnchorHide(state),
+  }
+}
+
+export default connect(mapStateToProps) (Layout);

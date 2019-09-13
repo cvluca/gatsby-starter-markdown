@@ -85,3 +85,9 @@ The current page contains a multiple level of sidebar, and it's defined with thr
 If the root entry is `Docs`, the `child_entries` will be added as the SubMenus (i.e. `Get Started` and `Guide`).
 
 It is allowed to contains both `child_entries` and `items` in single entry object, and the posts (i.e. `items`) will be rendered before the SubMenus (i.e. `child_entries`) on the sidebar.
+
+The order of items in the sidebar is based on the order you defined in `child_entries` and `items` in this file.
+
+## Hide Sidebar
+
+If you do not add `sidebar` entry in the markdown file (see [contents](/docs/guide/contents#information-of-the-page)), or set it to null, the sidebar will be hided.

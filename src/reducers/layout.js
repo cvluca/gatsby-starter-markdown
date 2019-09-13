@@ -7,13 +7,19 @@ import {
   ON_SIDEBAR_CONTENT_EXPANDED,
   ON_CHANGE_MENU_STATE,
   ON_SIDEBAR_CONTENT_SELECTED,
+  SET_ANCHOR_HIDE,
+  SET_SIDEBAR_HIDE,
 } from "../actions/actionTypes";
 
 const initialState = {
-  anchor: { open: false },
+  anchor: {
+    open: false,
+    hide: false
+  },
   sidebar: {
     docked: false,
     open: false,
+    hide: false,
     expandedKeys: [],
     selectedKey: '',
     entry: null,
@@ -37,6 +43,16 @@ export default function(state=initialState, action) {
         }
       }
     }
+    case SET_ANCHOR_HIDE: {
+      return {
+        ...state,
+        anchor: {
+          ...state.anchor,
+          hide: action.payload.anchorHide,
+          open: false
+        }
+      }
+    }
     // sidebar
     case SET_SIDEBAR_OPEN: {
       return {
@@ -54,6 +70,16 @@ export default function(state=initialState, action) {
           ...state.sidebar,
           docked: action.payload.sidebarDocked,
           open: action.payload.sidebarOpen
+        }
+      }
+    }
+    case SET_SIDEBAR_HIDE: {
+      return {
+        ...state,
+        sidebar: {
+          ...state.sidebar,
+          hide: action.payload.sidebarHide,
+          open: false
         }
       }
     }
