@@ -73,26 +73,42 @@ class Layout extends Component {
                       }
                     </Row>
                   </AntdLayout.Header>
-                  { !sidebarHide && !matches && onPostPage &&
-                    <AntdLayout.Sider>
-                      <ResponsiveSidebar/>
-                    </AntdLayout.Sider>
-                  }
-                  <AntdLayout.Content
-                    style={{
-                      position: "absolute",
-                      left: (sidebarHide || matches) ? 0 : "20%",
-                      right: (anchorHide || matches) ? 0 : "15%",
-                    }}
-                  >
-                    <Container sidebarDocked={!matches} onPostPage={onPostPage}>
-                      {children}
-                    </Container>
-                  </AntdLayout.Content>
-                  { !anchorHide && !matches && onPostPage &&
-                    <AntdLayout.Sider>
-                      <ResponsiveAnchor />
-                    </AntdLayout.Sider>
+                  {(!matches && onPostPage) ?
+                    <AntdLayout>
+                      {!sidebarHide && 
+                        <AntdLayout.Sider>
+                          <ResponsiveSidebar/>
+                        </AntdLayout.Sider>
+                      }
+                      <AntdLayout.Content
+                        style={{
+                          position: "absolute",
+                          left: "20%",
+                          right: "15%",
+                        }}
+                      >
+                        <Container sidebarDocked={!matches} onPostPage={onPostPage}>
+                          {children}
+                        </Container>
+                      </AntdLayout.Content>
+                      {!anchorHide &&
+                      <AntdLayout.Sider>
+                        <ResponsiveAnchor />
+                      </AntdLayout.Sider>
+                      }
+                    </AntdLayout>
+                    :
+                    <AntdLayout.Content
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        right: 0,
+                      }}
+                    >
+                      <Container sidebarDocked={!matches} onPostPage={onPostPage}>
+                        {children}
+                      </Container>
+                    </AntdLayout.Content>
                   }
                 </AntdLayout>
               </>)
