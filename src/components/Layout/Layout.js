@@ -75,37 +75,26 @@ class Layout extends Component {
                       }
                     </Row>
                   </AntdLayout.Header>
-
-                  {(!matches && onPostPage) ?
-                    <AntdLayout>
-                      { !sidebarHide &&
-                        <AntdLayout.Sider>
-                          <ResponsiveSidebar/>
-                        </AntdLayout.Sider>
-                      }
-                      <AntdLayout.Content
-                        style={{
-                          position: "absolute",
-                          left: (sidebarHide) ? 0 : "20%",
-                          right: (anchorHide) ? 0 : "15%",
-                        }}
-                      >
-                        <Container sidebarDocked={!matches} onPostPage={onPostPage}>
-                          {children}
-                        </Container>
-                      </AntdLayout.Content>
-                      { !anchorHide &&
-                        <AntdLayout.Sider>
-                          <ResponsiveAnchor />
-                        </AntdLayout.Sider>
-                      }
-                    </AntdLayout>
-                    :
-                    <AntdLayout.Content>
-                      <Container sidebarDocked={!matches} onPostPage={onPostPage}>
-                        {children}
-                      </Container>
-                    </AntdLayout.Content>
+                  { !sidebarHide && !matches && onPostPage &&
+                    <AntdLayout.Sider>
+                      <ResponsiveSidebar/>
+                    </AntdLayout.Sider>
+                  }
+                  <AntdLayout.Content
+                    style={{
+                      position: "absolute",
+                      left: (sidebarHide || matches) ? 0 : "20%",
+                      right: (anchorHide || matches) ? 0 : "15%",
+                    }}
+                  >
+                    <Container sidebarDocked={!matches} onPostPage={onPostPage}>
+                      {children}
+                    </Container>
+                  </AntdLayout.Content>
+                  { !anchorHide && !matches && onPostPage &&
+                    <AntdLayout.Sider>
+                      <ResponsiveAnchor />
+                    </AntdLayout.Sider>
                   }
                 </AntdLayout>
               </>)
