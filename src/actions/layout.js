@@ -1,48 +1,48 @@
-import { 
+import {
   SET_ANCHOR_OPEN,
-  SET_SIDEBAR_OPEN, 
-  SET_SIDEBAR_DOCKED, 
+  SET_SIDEBAR_OPEN,
+  SET_SIDEBAR_DOCKED,
   SET_SIDEBAR_CONTENT_ENTRY,
-  ON_SIDEBAR_CONTENT_EXPANDED, 
+  ON_SIDEBAR_CONTENT_EXPANDED,
   ON_SIDEBAR_CONTENT_SELECTED,
   ON_CHANGE_MENU_STATE,
   SET_SIDEBAR_CONTENT_STRUCTURE,
   SET_ANCHOR_HIDE,
   SET_SIDEBAR_HIDE,
-} from "./actionTypes";
+} from './actionTypes'
 
 // anchor
-export const onSetAnchorOpen = (open) => ({
+export const onSetAnchorOpen = open => ({
   type: SET_ANCHOR_OPEN,
   payload: {
-    anchorOpen: open
-  }
+    anchorOpen: open,
+  },
 })
 
-export const onSetAnchorHide = (hide) => ({
+export const onSetAnchorHide = hide => ({
   type: SET_ANCHOR_HIDE,
-  payload: { anchorHide: hide }
+  payload: { anchorHide: hide },
 })
 
 // sidebar
-export const onSetSidebarOpen = (open) => ({
+export const onSetSidebarOpen = open => ({
   type: SET_SIDEBAR_OPEN,
-  payload: { sidebarOpen: open }
+  payload: { sidebarOpen: open },
 })
 
-export const onSetSidebarDocked = (docked) => ({
+export const onSetSidebarDocked = docked => ({
   type: SET_SIDEBAR_DOCKED,
-  payload: { sidebarDocked: docked }
+  payload: { sidebarDocked: docked },
 })
 
-export const onSetSidebarHide = (hide) => ({
+export const onSetSidebarHide = hide => ({
   type: SET_SIDEBAR_HIDE,
-  payload: { sidebarHide: hide }
+  payload: { sidebarHide: hide },
 })
 
-export const onSetSidebarContentEntry = (entry) => ({
+export const onSetSidebarContentEntry = entry => ({
   type: SET_SIDEBAR_CONTENT_ENTRY,
-  payload: { sidebarEntry: entry }
+  payload: { sidebarEntry: entry },
 })
 
 export const onSetSidebarContentStructure = (entry, tree, dir) => ({
@@ -50,24 +50,24 @@ export const onSetSidebarContentStructure = (entry, tree, dir) => ({
   payload: {
     sidebarTree: tree,
     sidebarDir: dir,
-    selectedEntry: entry
-  }
+    selectedEntry: entry,
+  },
 })
 
-export const onSidebarContentExpanded = (keys) => ({
+export const onSidebarContentExpanded = keys => ({
   type: ON_SIDEBAR_CONTENT_EXPANDED,
-  payload: { expandedKeys: keys }
+  payload: { expandedKeys: keys },
 })
 
-export const onSidebarContentSelected = (key) => ({
+export const onSidebarContentSelected = key => ({
   type: ON_SIDEBAR_CONTENT_SELECTED,
-  payload: { selectedKey: key }
+  payload: { selectedKey: key },
 })
 
 // menu
-export const onChangeMenuState = (nItem) => ({
+export const onChangeMenuState = nItem => ({
   type: ON_CHANGE_MENU_STATE,
   payload: {
     nItem: nItem,
-  }
+  },
 })

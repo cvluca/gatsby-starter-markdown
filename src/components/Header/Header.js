@@ -1,26 +1,20 @@
 import React, { Component } from 'react'
-import { Link } from 'gatsby';
-import Menu from '../Menu';
-import { getMenuState } from '../../store/selectors';
-import { connect } from 'react-redux';
+import { Link } from 'gatsby'
+import Menu from '../Menu'
+import { getMenuState } from '../../store/selectors'
+import { connect } from 'react-redux'
 
 class Header extends Component {
-
   render() {
-    const { 
-      siteTitle,
-      sidebarDocked,
-      menuOpen,
-      nMenuItem,
-    } = this.props
-    
+    const { siteTitle, sidebarDocked, menuOpen, nMenuItem } = this.props
+
     return (
       <div
         style={{
-            // position: "fixed",
-            // top: 0,
-          width: "100%",
-          height: (menuOpen && !sidebarDocked) ? nMenuItem*32 + 50 : 55,
+          // position: "fixed",
+          // top: 0,
+          width: '100%',
+          height: menuOpen && !sidebarDocked ? nMenuItem * 32 + 50 : 55,
           marginBottom: 20,
           background: 'cornflowerblue',
         }}
@@ -33,11 +27,13 @@ class Header extends Component {
             whiteSpace: 'nowrap',
           }}
         >
-          <div style={{
-            float: 'left',
-            marginBottom: '10px',
-          }}>
-            <h1 style={{ margin: 0, fontSize: "1.25rem" }}>
+          <div
+            style={{
+              float: 'left',
+              marginBottom: '10px',
+            }}
+          >
+            <h1 style={{ margin: 0, fontSize: '1.25rem' }}>
               <Link
                 to="/"
                 style={{
@@ -49,18 +45,18 @@ class Header extends Component {
               </Link>
             </h1>
           </div>
-          <Menu sidebarDocked={sidebarDocked}/>
+          <Menu sidebarDocked={sidebarDocked} />
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     menuOpen: getMenuState(state).open,
     nMenuItem: getMenuState(state).nItem,
   }
 }
 
-export default connect(mapStateToProps) (Header);
+export default connect(mapStateToProps)(Header)

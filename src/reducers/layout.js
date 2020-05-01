@@ -1,6 +1,6 @@
-import { 
+import {
   SET_ANCHOR_OPEN,
-  SET_SIDEBAR_OPEN, 
+  SET_SIDEBAR_OPEN,
   SET_SIDEBAR_DOCKED,
   SET_SIDEBAR_CONTENT_ENTRY,
   SET_SIDEBAR_CONTENT_STRUCTURE,
@@ -9,12 +9,12 @@ import {
   ON_SIDEBAR_CONTENT_SELECTED,
   SET_ANCHOR_HIDE,
   SET_SIDEBAR_HIDE,
-} from "../actions/actionTypes";
+} from '../actions/actionTypes'
 
 const initialState = {
   anchor: {
     open: false,
-    hide: false
+    hide: false,
   },
   sidebar: {
     docked: false,
@@ -25,22 +25,21 @@ const initialState = {
     entry: null,
     selectedEntry: null,
     contentTree: null,
-    contentDir: []
+    contentDir: [],
   },
-  menu : { open : false },
+  menu: { open: false },
 }
 
-export default function(state=initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
-
     // anchor
     case SET_ANCHOR_OPEN: {
       return {
         ...state,
-        anchor: { 
+        anchor: {
           ...state.anchor,
-          open: action.payload.anchorOpen 
-        }
+          open: action.payload.anchorOpen,
+        },
       }
     }
     case SET_ANCHOR_HIDE: {
@@ -49,8 +48,8 @@ export default function(state=initialState, action) {
         anchor: {
           ...state.anchor,
           hide: action.payload.anchorHide,
-          open: false
-        }
+          open: false,
+        },
       }
     }
     // sidebar
@@ -59,8 +58,8 @@ export default function(state=initialState, action) {
         ...state,
         sidebar: {
           ...state.sidebar,
-          open: action.payload.sidebarOpen
-        }
+          open: action.payload.sidebarOpen,
+        },
       }
     }
     case SET_SIDEBAR_DOCKED: {
@@ -69,8 +68,8 @@ export default function(state=initialState, action) {
         sidebar: {
           ...state.sidebar,
           docked: action.payload.sidebarDocked,
-          open: action.payload.sidebarOpen
-        }
+          open: action.payload.sidebarOpen,
+        },
       }
     }
     case SET_SIDEBAR_HIDE: {
@@ -79,8 +78,8 @@ export default function(state=initialState, action) {
         sidebar: {
           ...state.sidebar,
           hide: action.payload.sidebarHide,
-          open: false
-        }
+          open: false,
+        },
       }
     }
     case SET_SIDEBAR_CONTENT_ENTRY: {
@@ -88,8 +87,8 @@ export default function(state=initialState, action) {
         ...state,
         sidebar: {
           ...state.sidebar,
-          entry: action.payload.sidebarEntry
-        }
+          entry: action.payload.sidebarEntry,
+        },
       }
     }
     case SET_SIDEBAR_CONTENT_STRUCTURE: {
@@ -99,8 +98,8 @@ export default function(state=initialState, action) {
           ...state.sidebar,
           selectedEntry: action.payload.selectedEntry,
           contentTree: action.payload.sidebarTree,
-          contentDir: action.payload.sidebarDir
-        }
+          contentDir: action.payload.sidebarDir,
+        },
       }
     }
     case ON_SIDEBAR_CONTENT_EXPANDED: {
@@ -109,7 +108,7 @@ export default function(state=initialState, action) {
         sidebar: {
           ...state.sidebar,
           expandedKeys: action.payload.expandedKeys,
-        }
+        },
       }
     }
     case ON_SIDEBAR_CONTENT_SELECTED: {
@@ -118,7 +117,7 @@ export default function(state=initialState, action) {
         sidebar: {
           ...state.sidebar,
           selectedKey: action.payload.selectedKey,
-        }
+        },
       }
     }
     //menu
@@ -128,9 +127,10 @@ export default function(state=initialState, action) {
         menu: {
           open: !state.menu.open,
           nItem: action.payload.nItem,
-        }
+        },
       }
     }
-    default: return state
+    default:
+      return state
   }
 }
