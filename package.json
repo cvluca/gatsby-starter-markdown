@@ -20,6 +20,7 @@
     "gatsby-transformer-json": "^2.2.8",
     "gatsby-transformer-remark": "^2.6.22",
     "gatsby-transformer-sharp": "^2.2.14",
+    "gatsby-plugin-remove-trailing-slashes": "^2.1.6",
     "katex": "^0.10.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -41,10 +42,12 @@
     "deploy": "gatsby build --prefix-paths && gh-pages -d public"
   },
   "devDependencies": {
-    "gatsby-plugin-remove-trailing-slashes": "^2.1.6",
     "gh-pages": "^2.1.1",
     "mem": "^5.1.1",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "minimist": ">=1.2.3",
+    "acorn": ">=6.4.1",
+    "kind-of": ">=6.0.3"
   },
   "repository": {
     "type": "git",
